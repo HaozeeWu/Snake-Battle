@@ -1,24 +1,51 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import PkIndexView from '../views/pk/PkIndexView'
+import RecordIndexView from '../views/record/RecordIndexView'
+import RanklistIndexView from '../views/ranklist/RanklistIndexView'
+import UserBotIndexView from '../views/user/bot/UserBotIndexView'
+import NotFound from '../views/error/NotFound'
 
 const routes = [
+  // 从上往下匹配，都不匹配就是为最后一个重定向为“404”
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "home",
+    redirect: "/pk/"
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: "/pk/",
+    name: "pk_index",
+    component: PkIndexView,
+  },
+  {
+    path: "/record/",
+    name: "record_index",
+    component: RecordIndexView,
+  },
+  {
+    path: "/ranklist/",
+    name: "ranklist_index",
+    component: RanklistIndexView,
+  },
+  {
+    path: "/user/bot/",
+    name: "user_bot_index",
+    component: UserBotIndexView,
+  },
+  {
+    path: "/404/",
+    name: "404",
+    component: NotFound,
+  },
+  {
+    path: "/:catcaAll(.*)",
+    redirect: "/404/"
   }
+
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 
