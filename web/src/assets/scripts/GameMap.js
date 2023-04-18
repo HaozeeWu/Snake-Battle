@@ -62,6 +62,7 @@ export class GameMap extends AcGameObject {
             for (let j = 0; j < 1000; j++){
                 let r = parseInt(Math.random() * this.rows);
                 let c = parseInt(Math.random() * this.cols);
+                // g[this.rows - 1 - r][this.cols - 1 - c]代表中心对称
                 if (g[r][c] || g[this.rows - 1 - r][this.cols - 1 - c]) continue;
                 if (r == this.rows - 2 && c == 1 || r == 1 && c == this.cols - 2)
                     continue;
