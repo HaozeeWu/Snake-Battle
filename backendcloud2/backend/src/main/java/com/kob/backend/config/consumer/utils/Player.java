@@ -12,6 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 public class Player {
     private Integer id;
+
+    private Integer botId; // -1表示人工操作（亲自上阵）
+    private String botCode;
     private Integer sx; // 行数
     private Integer sy; // 列数
     private List<Integer> steps; // 方向
