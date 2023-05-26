@@ -35,7 +35,7 @@ public class WebSocketServer {
     private Session session = null;
 
     // Websocket不是一个spring的东西，需要特殊的注入
-    private static UserMapper userMapper;
+    public static UserMapper userMapper;
     public static RecordMapper recordMapper;
 
     public static BotMapper botMapper;
