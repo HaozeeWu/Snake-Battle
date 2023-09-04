@@ -35,7 +35,7 @@ export default {
 
 <style>
 body {
-  background-image: url("./assets/images/1_59b8f162fd-background.png");
+  background-image: url("./assets/images/desert.jpg");
   background-size: cover;
 }
 </style>

@@ -124,7 +124,9 @@ public class Game extends Thread {
         }
 
         Random random = new Random();
+        // 每次循环生成一个障碍物
         for (int i = 0; i < this.inner_wall_count / 2; i ++) {
+            // 随机1000次来生成这个障碍物
             for (int j = 0; j < 1000; j++) {
                 int r = random.nextInt(this.rows);
                 int c = random.nextInt(this.cols);
@@ -189,9 +191,9 @@ public class Game extends Thread {
         sendBotCode(playerB);
 
 
-        for (int i = 0; i < 50; i ++) {
+        for (int i = 0; i < 100; i ++) {
             try {
-                Thread.sleep(100); // 先等待1秒，再锁住，读取操作
+                Thread.sleep(100); // 先等待0.1秒，再锁住，读取操作
                 lock.lock();;
                 try {
                     if (nextStepA != null && nextStepB != null) { // 两名玩家的操作都读到了
@@ -324,7 +326,7 @@ public class Game extends Thread {
         JSONObject resp = new JSONObject();
         resp.put("event", "result");
         resp.put("loser", loser);
-        saveToDataBase();
+        saveToDataBase(); // 公布结果前储存到数据库
         sendAllMessage(resp.toJSONString());
     }
     @Override

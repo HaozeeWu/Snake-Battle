@@ -21,7 +21,7 @@ div.playground {
     width: 60vw;
     height: 70vh;
     margin: 40px auto;
-    background-color:antiquewhite;
+    background-color:rgba(50, 50, 50, 0.5);
 
 }
 </style>

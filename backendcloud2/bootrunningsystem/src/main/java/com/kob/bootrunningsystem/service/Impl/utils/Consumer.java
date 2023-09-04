@@ -8,7 +8,11 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 @Component
 public class Consumer extends Thread {
@@ -28,7 +32,7 @@ public class Consumer extends Thread {
         this.start();
 
         try {
-            this.join(timeout); // 最多等待timeout秒
+            this.join(timeout); // 阻塞，等到此线程执行结束后才能继续执行其它的，最多等待timeout秒
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -38,7 +42,7 @@ public class Consumer extends Thread {
     }
 
     private String addUid(String code, String uid) { // 在code中的Bot类名后添加uid
-        int k = code.indexOf(" implements com.kob.bootrunningsystem.utils.BotInterface");
+        int k = code.indexOf(" implements java.util.function.Supplier<Integer>");
         return code.substring(0, k) + uid + code.substring(k);
 
     }
@@ -48,13 +52,24 @@ public class Consumer extends Thread {
         UUID uuid = UUID.randomUUID();
         String uid = uuid.toString().substring(0, 8);
 
-        BotInterface botInterface = Reflect.compile(
+        // 修改BotInterface为 supplier
+        Supplier<Integer> botInterface = Reflect.compile(
                 "com.kob.bootrunningsystem.utils.Bot" + uid,
                 addUid(bot.getBotCode(), uid)
 
         ).create().get();
 
-        Integer direction = botInterface.nextMove(bot.getInput());
+        // 将输入先存进文件里
+        File file = new File("input.txt");
+        try (PrintWriter fout = new PrintWriter(file)) {
+            fout.println(bot.getInput());
+            fout.flush();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        Integer direction = botInterface.get();
+//        Integer direction = botInterface.nextMove(bot.getInput());
 
         System.out.println(bot.getUserId() + " " +direction);
 

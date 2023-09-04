@@ -12,12 +12,14 @@
             </div>
             <div class="col-4">
                 <div class="user-select-bot">
+                    <label for="floatingSelect">选择对战方式 (自己操作或者选择bot机器人操作)</label>
                     <select v-model="select_bot" class="form-select" aria-label="Default select example">
                         <option value="-1" selected>亲自上阵</option>
                         <option v-for="bot in bots" :key="bot.id" :value="bot.id">
                             {{ bot.title }}
                         </option>
                     </select>
+                    
                 </div>
             </div>
             <div class="col-4">
@@ -68,7 +70,7 @@ export default {
 
         const refresh_bots = () => {
             $.ajax({
-                url: "http://127.0.0.1:3000/user/bot/getlist/",
+                url: "https://app5881.acapp.acwing.com.cn/api/user/bot/getlist/",
                 type: "get",
                 headers: {
                     Authorization: "Bearer " + store.state.user.token

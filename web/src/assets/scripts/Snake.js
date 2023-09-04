@@ -82,11 +82,11 @@ export class Snake extends AcGameObject {
 
     update_move() {
         // this.cells[0].x += this.speed * this.timedelta / 1000;
-        
+        // 目前的蛇头和目标位置的距离
         const dx = this.next_cell.x - this.cells[0].x;
         const dy = this.next_cell.y - this.cells[0].y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        
+        // 如果还没有到达，那么先走向目的地
         if (distance < this.eps) {
             this.cells[0] = this.next_cell; // 此时已经移动到了目标点，将目标点作为真实的头部
             this.next_cell = null;
@@ -134,15 +134,18 @@ export class Snake extends AcGameObject {
         }
 
         // js里面，of遍历值，in遍历下标
+        // 画出蛇身的每个细胞
         for (const cell of this.cells) {
             // 开启路径
             ctx.beginPath();
             // 画圆弧
             ctx.arc(cell.x * L, cell.y * L, L / 2 * 0.8, 0, Math.PI * 2);
             ctx.fill();
+            
         }
-
+        // 将每两个相邻的细胞之间用长方形覆盖，使看起来更连贯
         for (let i = 1; i < this.cells.length; i ++) {
+            // 
             const a = this.cells[i - 1], b = this.cells[i];
             if (Math.abs(a.x - b.x) < this.eps && Math.abs(a.y - b.y) < this.eps)
                 continue;

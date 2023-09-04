@@ -15,7 +15,7 @@ public class BotPool extends Thread{
         lock.lock();
         try {
             bots.add(new Bot(userId, botCode, input));
-            condition.signalAll(); // 唤醒
+            condition.signalAll(); // 另外一个线程执行到这里，唤醒那个睡住的线程（因为只有一个线程，所以signalall唤醒全部是可以的）
         } finally {
             lock.unlock();
         }
@@ -32,7 +32,7 @@ public class BotPool extends Thread{
              lock.lock();
              if (bots.isEmpty()) {
                  try {
-                     condition.await(); // 如果消息队列为空，则在这里“睡住”
+                     condition.await(); // 如果消息队列为空，则在这里“睡住”，睡住的时候锁会释放
                  } catch (InterruptedException e) {
                      e.printStackTrace();
                      lock.unlock();

@@ -197,7 +197,8 @@ export class GameMap extends AcGameObject {
         // this.ctx.fillRect(10, 10, 150, 50);
 
         // 奇偶数不同颜色
-        const color_even = "#AAD751", coler_odd = "#A2D149";
+        const color_even = "#DCDCDC", coler_odd = "#D3D3D3";
+        // const color_even = "#AAD751", coler_odd = "#A2D149";
         for (let r = 0; r < this.rows; r++){
             for (let c = 0; c < this.cols; c++) {
                 if(( r + c ) % 2 == 0) {

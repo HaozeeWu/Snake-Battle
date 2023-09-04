@@ -17,6 +17,32 @@
             </div>
         </div>
     </ContentField>
+    <div class="prompt-box" v-if="$store.state.pk.status === 'matching'">
+        已注册的测试账号：
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">用户名</th>
+                <th scope="col">密码</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">1</th>
+                <td>test1</td>
+                <td>p1</td>
+                </tr>
+                <tr>
+                <th scope="row">2</th>
+                <td>test2</td>
+                <td>p2</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        因为目前匹配池里可能没有玩家在线匹配，若使用同一台机器体验, 请使用两个不同的浏览器分别登录两个账号, 进行PK对战
+    </div>
 </template>
 
 
@@ -89,5 +115,14 @@ div.error-message {
 }
 button {
     width: 100%;
+}
+div.prompt-box {
+    text-align: center;
+    color: rgb(14, 8, 8);
+    font-size: 20px;
+    font-weight: 600;
+    padding-left: 35%;
+    padding-right: 35%;
+    padding-top: 20px;
 }
 </style>

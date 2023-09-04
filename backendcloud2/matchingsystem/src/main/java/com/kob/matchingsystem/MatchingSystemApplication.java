@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MatchingSystemApplication {
 
     public static void main(String[] args) {
+        System.out.print(1);
         MatchingServiceImpl.matchingPool.start(); // 启动匹配线程
         SpringApplication.run(MatchingSystemApplication.class, args);
     }

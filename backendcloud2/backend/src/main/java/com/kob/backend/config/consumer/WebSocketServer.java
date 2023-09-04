@@ -161,6 +161,7 @@ public class WebSocketServer {
     }
 
     private void move(int direction) {
+        // 确定发来移动指令的 websocket属于哪个user，那么就根据这个userid来判断是game里的 A 或 B
         if (game.getPlayerA().getId().equals(user.getId())) {
             if (game.getPlayerA().getBotId().equals(-1)) { // 如果是人工操作.防止bot操作时人也可以输入
                 game.setNextStepA(direction);

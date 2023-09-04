@@ -15,9 +15,9 @@ public class Player {
 
     private Integer botId; // -1表示人工操作（亲自上阵）
     private String botCode;
-    private Integer sx; // 行数
-    private Integer sy; // 列数
-    private List<Integer> steps; // 方向
+    private Integer sx; // 初始蛇所在的行数
+    private Integer sy; // 初始蛇所在的列数
+    private List<Integer> steps; // 历史走过的每一步的方向
     private boolean check_tail_increasing(int step) { // 检查蛇当前回合是否会变长
         if (step <= 10) return true;
         return step % 3 == 1;
